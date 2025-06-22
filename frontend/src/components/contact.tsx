@@ -12,7 +12,7 @@ const Contact = () => {
     e.preventDefault();
 
     try {
-      const res = await fetch('http://localhost:8000/contact', {
+      const res = await fetch('https://fardeen-portfolio-17v4.onrender.com/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
