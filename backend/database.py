@@ -4,7 +4,9 @@ from sqlalchemy.orm import sessionmaker
 
 DATABASE_URL = "postgresql://fardeen_contacts_db_user:XsNFw0BYTRqvCpYnjSssESgrgtgoI5Sx@dpg-d1bvfm2dbo4c73ce74a0-a/fardeen_contacts_db"
 
-engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
+# ✅ Correct for PostgreSQL
+engine = create_engine(DATABASE_URL)
+
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
@@ -16,5 +18,5 @@ class Contact(Base):
     email = Column(String, nullable=False)
     message = Column(Text, nullable=False)
 
-# Create the table if it doesn't exist
+# ✅ Create the table in PostgreSQL
 Base.metadata.create_all(bind=engine)
