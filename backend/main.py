@@ -12,7 +12,7 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # or specify ["https://fardeen-portfolio-iota.vercel.app"]
+    allow_origins=["https://fardeen-portfolio-iota.vercel.app"],  # 👈 safer than "*"
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
