@@ -2,7 +2,7 @@ from sqlalchemy import create_engine, Column, Integer, String, Text
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
-DATABASE_URL = "sqlite:///./contacts.db"
+DATABASE_URL = "postgresql://fardeen_conatcts_db_user:sJPIK22KIWuInnZwGExsDp9p30puTDpM@dpg-d1bvb1be5dus73f0vpu0-a/fardeen_conatcts_db"
 
 engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
