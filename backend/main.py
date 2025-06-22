@@ -3,16 +3,16 @@ from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from pydantic import BaseModel
 from typing import List
+from fastapi.middleware.cors import CORSMiddleware
 
 from database import Contact, SessionLocal  # from database.py
 
 # Initialize FastAPI
 app = FastAPI()
 
-# Enable CORS for frontend access
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],  # Your React app URL
+    allow_origins=["*"],  # or specify ["https://fardeen-portfolio-iota.vercel.app"]
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
