@@ -1,12 +1,11 @@
 from sqlalchemy import create_engine, Column, Integer, String, Text
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+import os
 
-DATABASE_URL = "postgresql://fardeen_contacts_db_user:XsNFw0BYTRqvCpYnjSssESgrgtgoI5Sx@dpg-d1bvfm2dbo4c73ce74a0-a/fardeen_contacts_db"
+DATABASE_URL = os.environ.get("DATABASE_URL")
 
-# ✅ Correct for PostgreSQL
-engine = create_engine(DATABASE_URL)
-
+engine = create_engine(DATABASE_URL)  # ✅ No connect_args for PostgreSQL
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
@@ -18,5 +17,5 @@ class Contact(Base):
     email = Column(String, nullable=False)
     message = Column(Text, nullable=False)
 
-# ✅ Create the table in PostgreSQL
+# Create the table if it doesn't exist
 Base.metadata.create_all(bind=engine)
