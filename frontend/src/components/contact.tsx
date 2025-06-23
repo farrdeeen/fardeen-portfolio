@@ -10,7 +10,6 @@ const Contact = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
     try {
       const res = await fetch('https://fardeen-portfolio-17v4.onrender.com/contact', {
         method: 'POST',
@@ -34,9 +33,8 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="max-w-xl mx-auto p-6 bg-white shadow-lg rounded-lg">
-    <div className="max-w-xl mx-auto p-6 bg-white shadow-lg rounded-lg">
-      <h2 className="text-2xl font-bold mb-4">Contact Me</h2>
+    <section id="contact" className="max-w-xl mx-auto p-6 bg-white shadow-lg rounded-lg mt-20">
+      <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">Contact Me</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <input
           name="name"
@@ -44,6 +42,7 @@ const Contact = () => {
           placeholder="Your Name"
           value={form.name}
           onChange={handleChange}
+          aria-label="Your Name"
           className="w-full p-3 border border-gray-300 rounded"
           required
         />
@@ -53,6 +52,7 @@ const Contact = () => {
           placeholder="Your Email"
           value={form.email}
           onChange={handleChange}
+          aria-label="Your Email"
           className="w-full p-3 border border-gray-300 rounded"
           required
         />
@@ -61,16 +61,20 @@ const Contact = () => {
           placeholder="Your Message"
           value={form.message}
           onChange={handleChange}
+          aria-label="Your Message"
           className="w-full p-3 border border-gray-300 rounded"
           rows={5}
           required
         ></textarea>
-        <button type="submit" className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded">
+        <button type="submit" className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded w-full">
           Send Message
         </button>
       </form>
-      {status && <p className="mt-4 text-sm text-green-600">{status}</p>}
-    </div>
+      {status && (
+        <p className={`mt-4 text-sm ${status.startsWith('Message') ? 'text-green-600' : 'text-red-600'}`}>
+          {status}
+        </p>
+      )}
     </section>
   );
 };
