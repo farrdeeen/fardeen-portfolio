@@ -11,19 +11,16 @@ const Contact = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const res = await fetch(
-        'postgresql://postgres:FEOJVTYCLlVBXJBoDlgxUsYCzQMnohlv@postgres.railway.internal:5432/railway',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(form),
-        }
-      );
+      const res = await fetch('https://fardeen-portfolio-production.up.railway.app/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(form),
+      });
 
       const data = await res.json();
-      if (res.ok && data.status === 'success') {
+      if (res.ok) {
         setStatus('Message sent!');
         setForm({ name: '', email: '', message: '' });
       } else {
