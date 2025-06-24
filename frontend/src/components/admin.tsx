@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 
 type Message = {
-  id: number;
   name: string;
   email: string;
   message: string;
@@ -12,10 +11,20 @@ const Admin = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("https://fardeen-portfolio-17v4.onrender.com/messages")
+    fetch("https://script.google.com/macros/s/AKfycbyN83AlFbIkDyq9Gg0KyTE8-Xc9KH0CONSVFdEGVkCs_Q1yQ5o21asBubH0ZLSd3d07zg/exec")
       .then((res) => res.json())
       .then((data) => {
-        setMessages(data);
+        if (Array.isArray(data)) {
+          setMessages(data);
+        } else if (Array.isArray(data.data)) {
+          setMessages(data.data);
+        } else {
+          console.warn("Unexpected response:", data);
+        }
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Failed to fetch messages:", err);
         setLoading(false);
       });
   }, []);
@@ -30,9 +39,9 @@ const Admin = () => {
         <p>No messages found.</p>
       ) : (
         <div className="space-y-6">
-          {messages.map((msg) => (
+          {messages.map((msg, index) => (
             <div
-              key={msg.id}
+              key={index}
               className="bg-gray-800 p-6 rounded-xl shadow-lg border-l-4 border-yellow-400"
             >
               <h2 className="text-xl font-semibold">{msg.name}</h2>

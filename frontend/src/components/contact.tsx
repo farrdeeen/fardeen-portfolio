@@ -11,20 +11,23 @@ const Contact = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const res = await fetch('https://fardeen-portfolio-17v4.onrender.com/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(form),
-      });
+      const res = await fetch(
+        'https://script.google.com/macros/s/AKfycbyN83AlFbIkDyq9Gg0KyTE8-Xc9KH0CONSVFdEGVkCs_Q1yQ5o21asBubH0ZLSd3d07zg/exec',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(form),
+        }
+      );
 
       const data = await res.json();
-      if (res.ok) {
+      if (res.ok && data.status === 'success') {
         setStatus('Message sent!');
         setForm({ name: '', email: '', message: '' });
       } else {
-        setStatus(`Error: ${data.detail || 'Failed to send message'}`);
+        setStatus('Failed to send message.');
       }
     } catch (err) {
       console.error(err);

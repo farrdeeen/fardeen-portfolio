@@ -1,17 +1,19 @@
-# Python
-venv/
-__pycache__/
-*.pyc
-
-# Node.js
+# === Node.js (Frontend) ===
 frontend/node_modules/
 frontend/dist/
+frontend/.next/
 *.log
 
-# SQLite
+# === Python (Backend) ===
+venv/
+__pycache__/
+*.py[cod]
+*.sqlite3
 backend/contacts.db
+backend/.env
 
-# Editor & OS
-.vscode/
+# === OS & Editor Files ===
 .DS_Store
 .env
+.vscode/
+*.swp
