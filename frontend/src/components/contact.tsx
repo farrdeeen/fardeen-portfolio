@@ -12,7 +12,7 @@ const Contact = () => {
     e.preventDefault();
     try {
       const res = await fetch(
-        'https://script.google.com/macros/s/AKfycbyN83AlFbIkDyq9Gg0KyTE8-Xc9KH0CONSVFdEGVkCs_Q1yQ5o21asBubH0ZLSd3d07zg/exec',
+        'postgresql://postgres:FEOJVTYCLlVBXJBoDlgxUsYCzQMnohlv@postgres.railway.internal:5432/railway',
         {
           method: 'POST',
           headers: {

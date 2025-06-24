@@ -11,7 +11,7 @@ const Admin = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("https://script.google.com/macros/s/AKfycbyN83AlFbIkDyq9Gg0KyTE8-Xc9KH0CONSVFdEGVkCs_Q1yQ5o21asBubH0ZLSd3d07zg/exec")
+    fetch("postgresql://postgres:FEOJVTYCLlVBXJBoDlgxUsYCzQMnohlv@postgres.railway.internal:5432/railway")
       .then((res) => res.json())
       .then((data) => {
         if (Array.isArray(data)) {

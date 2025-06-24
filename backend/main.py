@@ -43,7 +43,7 @@ class ContactResponse(BaseModel):
     message: str
 
     class Config:
-        orm_mode = True
+        from_attributes = True  # ✅ Pydantic v2 style
 
 # POST /contact - Save message to DB
 @app.post("/contact", response_model=ContactResponse)
