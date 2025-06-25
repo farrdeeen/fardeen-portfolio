@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 type Message = {
+  id: number;
   name: string;
   email: string;
   message: string;
@@ -10,27 +11,23 @@ const Admin = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState(true);
 
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
   useEffect(() => {
-    fetch("postgresql://postgres:FEOJVTYCLlVBXJBoDlgxUsYCzQMnohlv@postgres.railway.internal:5432/railway")
+    fetch(`${backendUrl}/messages`)
       .then((res) => res.json())
       .then((data) => {
-        if (Array.isArray(data)) {
-          setMessages(data);
-        } else if (Array.isArray(data.data)) {
-          setMessages(data.data);
-        } else {
-          console.warn("Unexpected response:", data);
-        }
+        setMessages(data);
         setLoading(false);
       })
-      .catch((err) => {
-        console.error("Failed to fetch messages:", err);
+      .catch((error) => {
+        console.error("Error fetching messages:", error);
         setLoading(false);
       });
-  }, []);
+  }, [backendUrl]);
 
   return (
-    <section className="min-h-screen bg-gray-900 text-white p-10">
+    <section className="pt-24 min-h-screen bg-gray-900 text-white p-10">
       <h1 className="text-4xl font-bold mb-6">Admin Dashboard</h1>
 
       {loading ? (
@@ -39,9 +36,9 @@ const Admin = () => {
         <p>No messages found.</p>
       ) : (
         <div className="space-y-6">
-          {messages.map((msg, index) => (
+          {messages.map((msg) => (
             <div
-              key={index}
+              key={msg.id}
               className="bg-gray-800 p-6 rounded-xl shadow-lg border-l-4 border-yellow-400"
             >
               <h2 className="text-xl font-semibold">{msg.name}</h2>
