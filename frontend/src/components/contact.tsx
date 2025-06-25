@@ -19,7 +19,7 @@ const Contact = () => {
         body: JSON.stringify(form),
       });
 
-      const data = await res.json();
+      
       if (res.ok) {
         setStatus('Message sent!');
         setForm({ name: '', email: '', message: '' });
