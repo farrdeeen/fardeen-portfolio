@@ -11,6 +11,8 @@ __pycache__/
 *.sqlite3
 backend/contacts.db
 backend/.env
+frontend/.env
+
 
 # === OS & Editor Files ===
 .DS_Store
