@@ -25,7 +25,7 @@ const About = () => {
       <div className="max-w-4xl mx-auto text-center">
         <h2 className="text-4xl font-bold text-gray-800 mb-6">About Me</h2>
         <p className="text-lg text-gray-600 leading-relaxed mb-10">
-          Hello! I'm Fardeen Khan, a frontend developer passionate about
+          Hello! I'm Fardeen Khan, a fullstack developer passionate about
           building modern, responsive web apps. I enjoy working with React,
           Tailwind, and TypeScript, and I’m expanding into backend development
           with Python and FastAPI.
