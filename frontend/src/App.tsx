@@ -4,12 +4,11 @@ import About from "./components/about";
 import Contact from "./components/contact";
 import Admin from "./components/admin";
 import Login from "./components/login";
+import ProtectedRoute from "./components/protectedroute";
 
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
-  const isAdmin = localStorage.getItem("admin-auth") === "true";
-
   return (
     <BrowserRouter>
       <Navbar />
@@ -18,9 +17,24 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/admin" element={isAdmin ? <Admin /> : <Navigate to="/login" />} />
         <Route path="/login" element={<Login />} />
-        <Route path="*" element={<h1 className="text-center text-white p-20">404 Page Not Found</h1>} />
+        
+        {/* Protected Admin Route */}
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute>
+              <Admin />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="*"
+          element={
+            <h1 className="text-center text-white p-20">404 Page Not Found</h1>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );

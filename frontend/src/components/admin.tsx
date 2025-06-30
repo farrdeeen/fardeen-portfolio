@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 type Message = {
   id: number;
@@ -10,8 +11,15 @@ type Message = {
 const Admin = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
+    const isAuthenticated = localStorage.getItem("admin-auth") === "true";
+    if (!isAuthenticated) {
+      navigate("/login");
+      return;
+    }
+
     fetch("https://fardeen-portfolio-production.up.railway.app/messages")
       .then((res) => res.json())
       .then((data) => {
@@ -22,39 +30,39 @@ const Admin = () => {
         console.error("Error fetching messages:", error);
         setLoading(false);
       });
-  }, []);
+  }, [navigate]);
+
+  const handleLogout = () => {
+    localStorage.removeItem("admin-auth");
+    navigate("/login");
+  };
 
   return (
-    <section className="pt-24 min-h-screen bg-gray-900 text-white px-6 sm:px-10 lg:px-20">
-      <div className="flex justify-between items-center mb-8">
-        <h1 className="text-3xl sm:text-4xl font-bold">📬 Admin Dashboard</h1>
+    <section className="pt-24 min-h-screen bg-gray-900 text-white p-10">
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-4xl font-bold">Admin Dashboard</h1>
         <button
-          onClick={() => {
-            localStorage.removeItem("admin-auth");
-            window.location.href = "/login";
-          }}
-          className="bg-red-500 hover:bg-red-600 px-4 py-2 rounded text-sm sm:text-base font-semibold"
+          onClick={handleLogout}
+          className="bg-red-500 hover:bg-red-600 px-4 py-2 rounded text-sm font-semibold"
         >
           Logout
         </button>
       </div>
 
       {loading ? (
-        <p className="text-lg text-gray-300">Loading messages...</p>
+        <p>Loading messages...</p>
       ) : messages.length === 0 ? (
-        <p className="text-lg text-gray-400">No messages found.</p>
+        <p>No messages found.</p>
       ) : (
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="space-y-6">
           {messages.map((msg) => (
             <div
               key={msg.id}
-              className="bg-gray-800 p-6 rounded-xl shadow-md border-l-4 border-yellow-400 transition-transform hover:scale-[1.02]"
+              className="bg-gray-800 p-6 rounded-xl shadow-lg border-l-4 border-yellow-400"
             >
-              <div className="mb-2">
-                <h2 className="text-lg font-semibold">{msg.name}</h2>
-                <p className="text-sm text-gray-400">{msg.email}</p>
-              </div>
-              <p className="text-sm mt-4 text-gray-100 whitespace-pre-wrap">{msg.message}</p>
+              <h2 className="text-xl font-semibold">{msg.name}</h2>
+              <p className="text-sm text-gray-400">{msg.email}</p>
+              <p className="mt-3">{msg.message}</p>
             </div>
           ))}
         </div>
