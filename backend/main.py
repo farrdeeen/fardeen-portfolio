@@ -14,7 +14,8 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "https://fardeen-portfolio-iota.vercel.app",
-        "https://fardeen-portfolio-mpyr2im5k-fardeens-projects-8d92f3b5.vercel.app",   # Your deployed Vercel frontend
+        "https://fardeen-portfolio-mpyr2im5k-fardeens-projects-8d92f3b5.vercel.app",
+         "https://fardeen-portfolio-ennin1ewb-fardeens-projects-8d92f3b5.vercel.app",     # Your deployed Vercel frontend
         "http://localhost:5173",                     # Local development
     ],
     allow_credentials=True,
